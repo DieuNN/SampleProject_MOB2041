@@ -15,15 +15,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         sharedPreferences = getSharedPreferences("saved_info", MODE_PRIVATE)
         preferencesEditor = sharedPreferences.edit()
+        setContentView(binding.root)
 
         if (sharedPreferences.getBoolean("remember", false)) {
             innerInfoFromSharedPreferences(sharedPreferences.getBoolean("remember", false))
         }
-        
-        
 
         binding.btnSignIn.setOnClickListener {
             if (isEmpty(binding.edtSignInUsername, binding.edtSignInPassword)) {

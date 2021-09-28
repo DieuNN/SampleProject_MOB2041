@@ -9,7 +9,7 @@
     <string name="sign_out">Đăng xuất</string>
     <string name="call_card_management">Quản lý phiếu mượn</string>
     <string name="book_management">Quản lý sách</string>
-    <string name="genral_management">Quản lý thể loại sách</string>
+    <string name="genre_management">Quản lý thể loại sách</string>
     <string name="customer_management">Quản lý thành viên</string>
     <string name="analytics">Thống kê</string>
     <string name="top_10_best_seller">10 sách có doanh thu cao nhất</string>
