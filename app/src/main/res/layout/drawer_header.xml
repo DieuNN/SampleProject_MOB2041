@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@color/purple_500"
+    android:paddingEnd="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:background="@null"
+        android:id="@+id/cardHeaderImage"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:elevation="12dp"
+        app:cardCornerRadius="40dp"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
+
+        <ImageView
+            android:src="@drawable/ic_baseline_perm_identity_24"
+            android:backgroundTint="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/drawer_header_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/cardHeaderImage"
+        android:text="Xin chào: regergyudshijkwrtuyfdnjtyjctechytjv"
+        android:textColor="@color/white" />
+
+
+
+</RelativeLayout>

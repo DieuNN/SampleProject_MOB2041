@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">SampleProject_MOB2041</string>
+    <string name="app_name">LibMANA</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="re_password">Nhập lại mật khẩu</string>
+    <string name="display_name">Tên hiển thị</string>
+    <string name="remember_password">Nhớ mật khẩu</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="sign_out">Đăng xuất</string>
 </resources>
