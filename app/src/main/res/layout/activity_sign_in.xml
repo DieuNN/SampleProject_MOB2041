@@ -30,14 +30,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:endIconMode="password_toggle"
         android:id="@+id/edtLayoutSignInPassword"
         android:hint="@string/password"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPassword"
             android:id="@+id/edtSignInPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

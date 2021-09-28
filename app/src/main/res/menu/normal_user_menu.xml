@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/call_card_management" />
+    <item
+        android:icon="@drawable/book_icon"
+        android:title="@string/book_management" />
+    <item
+        android:icon="@drawable/ic_baseline_library_books_24"
+        android:title="@string/genral_management" />
+    <item
+        android:icon="@drawable/baseline_groups_black_24dp"
+        android:title="@string/customer_management" />
+
+    <item android:title="@string/analytics">
+        <menu>
+            <item
+                android:icon="@drawable/ic_baseline_bar_chart_24"
+                android:title="@string/top_10_best_seller" />
+            <item
+                android:icon="@drawable/ic_baseline_attach_money_24"
+                android:title="@string/income" />
+        </menu>
+    </item>
+
+    <item android:title="@string/user">
+        <menu>
+            <item
+                android:icon="@drawable/ic_baseline_edit_24"
+                android:title="@string/edit_information" />
+            <item
+                android:icon="@drawable/ic_baseline_login_24"
+                android:title="@string/sign_out" />
+        </menu>
+    </item>
+
+</menu>

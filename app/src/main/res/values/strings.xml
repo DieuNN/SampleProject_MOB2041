@@ -7,4 +7,14 @@
     <string name="remember_password">Nhớ mật khẩu</string>
     <string name="sign_in">Đăng nhập</string>
     <string name="sign_out">Đăng xuất</string>
+    <string name="call_card_management">Quản lý phiếu mượn</string>
+    <string name="book_management">Quản lý sách</string>
+    <string name="genral_management">Quản lý thể loại sách</string>
+    <string name="customer_management">Quản lý thành viên</string>
+    <string name="analytics">Thống kê</string>
+    <string name="top_10_best_seller">10 sách có doanh thu cao nhất</string>
+    <string name="income">Doanh thu</string>
+    <string name="librarian_list">Danh sách thủ thư</string>
+    <string name="edit_information">Chỉnh sửa thông tin</string>
+    <string name="user">Người dùng</string>
 </resources>
