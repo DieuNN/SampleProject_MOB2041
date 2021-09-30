@@ -42,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
     private fun innerInfoFromSharedPreferences(isChecked: Boolean) {
         binding.edtSignInUsername.setText(sharedPreferences.getString("username", ""))
         binding.edtSignInPassword.setText(sharedPreferences.getString("password", ""))
+        binding.chkSignInRememberPassword.isChecked = isChecked
     }
 
     override fun onBackPressed() {

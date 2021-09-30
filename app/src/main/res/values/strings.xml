@@ -17,4 +17,6 @@
     <string name="librarian_list">Danh sách thủ thư</string>
     <string name="edit_information">Chỉnh sửa thông tin</string>
     <string name="user">Người dùng</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
