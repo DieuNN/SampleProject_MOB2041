@@ -3,11 +3,11 @@ package com.example.sampleproject_mob2041.dao
 import com.example.sampleproject_mob2041.model.Librarian
 
 interface ILibrarian {
-    fun addLibrarian(loginName:String, displayName:String, password:String)
+    fun addLibrarian(loginName:String, displayName:String, password:String):Boolean
 
-    fun editLibrarian(loginName:String, newLibrarianValue:Librarian)
+    fun editLibrarian(loginName:String, newLibrarianValue:Librarian):Boolean
 
-    fun removeLibrarian(loginName: String)
+    fun removeLibrarian(loginName: String):Boolean
 
     fun getAllLibrarians():ArrayList<Librarian>
 }

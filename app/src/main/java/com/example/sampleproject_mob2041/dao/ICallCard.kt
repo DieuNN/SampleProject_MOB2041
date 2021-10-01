@@ -10,12 +10,12 @@ interface ICallCard {
         genre: String,
         librarianName: String,
         borrowTime: String,
-        isReturned: Boolean
+        isReturned: String
     ): Boolean
 
     fun removeCard(ID: Int):Boolean
 
-    fun editCard(ID: Int, newCallCardValue:CallCard)
+    fun editCard(ID: Int, newCallCardValue:CallCard):Boolean
 
     fun getAllCallCards():ArrayList<CallCard>
 }

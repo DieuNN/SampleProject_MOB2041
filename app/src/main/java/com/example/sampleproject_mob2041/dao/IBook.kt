@@ -5,7 +5,7 @@ import com.example.sampleproject_mob2041.model.Book
 interface IBook {
     fun addBook(name:String, genre:String, price:Double):Boolean
 
-    fun editBook(name:String, newBookValue:Book)
+    fun editBook(name:String, newBookValue:Book):Boolean
 
     fun removeBook(name:String):Boolean
 
