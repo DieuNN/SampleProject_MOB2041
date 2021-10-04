@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="8dp"
+    android:id="@+id/customer_item"
+    >
+
+    <TextView
+        android:id="@+id/customer_item_name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Customer name example"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/customer_item_phone_number"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/customer_item_name"
+        android:text="Phone number Example"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/customer_item_address"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/customer_item_phone_number"
+        android:text="Address example"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

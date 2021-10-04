@@ -94,6 +94,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.drawerLayoutFrameLayout,
                 GenreManagementFragment()
             ).commit()
+            R.id.admin_menu_customer_management, R.id.normal_user_menu_customer_management -> transaction.replace(
+                R.id.drawerLayoutFrameLayout,
+                CustomerManagementFragment()
+            ).commit()
             R.id.admin_menu_top_10, R.id.normal_user_menu_top_10 -> transaction.replace(
                 R.id.drawerLayoutFrameLayout,
                 Top10Fragment()
