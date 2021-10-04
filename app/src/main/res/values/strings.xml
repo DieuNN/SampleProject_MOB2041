@@ -38,6 +38,11 @@
     <string name="remove_failed">Xoá thất bại!</string>
     <string name="edit">Chỉnh sửa</string>
     <string name="delete">Xoá</string>
+    <string name="confirm_delete">Bạn có chăc muốn xóa?</string>
+    <string name="edit_successfull">Chỉnh sửa thành công!</string>
+    <string name="edit_failed">Chỉnh sửa thất bại!</string>
+    <string name="add_new_customer">Thêm khách hàng mới</string>
+
     
 
 

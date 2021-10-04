@@ -36,8 +36,8 @@ class GenreAdapter( val mContext: Context, var mList:ArrayList<Genre>) : Recycle
             v: View?,
             menuInfo: ContextMenu.ContextMenuInfo?
         ) {
-            menu?.add(adapterPosition, EDIT, 0, "Sua")
-            menu?.add(adapterPosition, DELETE, 1, "Lmao")
+            menu?.add(adapterPosition, EDIT, 0, "Sửa")
+            menu?.add(adapterPosition, DELETE, 1, "Xoá")
         }
 
 
@@ -58,14 +58,32 @@ class GenreAdapter( val mContext: Context, var mList:ArrayList<Genre>) : Recycle
        return mList.size
     }
     
-    fun deleteItem(genre: Genre) {
+    fun deleteItem(position: Int) {
         genreDB = GenreDB(Database(mContext))
         
-        if (genreDB.removeGenre(genre.name)) {
+        if (genreDB.removeGenre(mList[position].name)) {
             Toast.makeText(mContext, mContext.getText(R.string.remove_successful), Toast.LENGTH_SHORT).show()
+            mList.clear()
+            mList = genreDB.getAllGenres()
+            this.notifyItemRangeChanged(position, mList.size)
+            this.notifyItemRemoved(position)
         } else {
             Toast.makeText(mContext, mContext.getString(R.string.remove_failed), Toast.LENGTH_SHORT).show()
         }
+    }
 
+
+    fun editItem(position: Int, newValue:Genre) {
+        genreDB = GenreDB(Database(mContext))
+
+        if (genreDB.editGenre(mList[position].name, newValue)) {
+            Toast.makeText(mContext, mContext.getText(R.string.edit_successfull), Toast.LENGTH_SHORT).show()
+            mList.clear()
+            mList = genreDB.getAllGenres()
+            this.notifyItemChanged(position)
+            this.notifyItemRangeChanged(0, mList.size)
+        } else{
+            Toast.makeText(mContext, mContext.getText(R.string.edit_failed), Toast.LENGTH_SHORT).show()
+        }
     }
 }

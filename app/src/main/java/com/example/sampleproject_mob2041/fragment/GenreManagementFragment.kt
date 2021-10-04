@@ -24,9 +24,9 @@ import com.google.android.material.textfield.TextInputLayout
 
 class GenreManagementFragment : Fragment() {
     private lateinit var binding: FragmentGenreBinding
-    private lateinit var adapter:GenreAdapter
-    private lateinit var genreList:ArrayList<Genre>
-    private lateinit var genreDB:GenreDB
+    private lateinit var adapter: GenreAdapter
+    private lateinit var genreList: ArrayList<Genre>
+    private lateinit var genreDB: GenreDB
 
 
     override fun onCreateView(
@@ -48,19 +48,19 @@ class GenreManagementFragment : Fragment() {
 
         setupRecyclerView(binding.genreList)
 
-        setupFAB(binding.fabAddGenre)
+        onFabClicked(binding.fabAddGenre)
 
     }
 
     private fun setupRecyclerView(view: RecyclerView) {
         SetupRecyclerView().setupRecyclerView(
-                requireContext(),
-                binding.genreList,
-                adapter as RecyclerView.Adapter<RecyclerView.ViewHolder>
-            )
+            requireContext(),
+            binding.genreList,
+            adapter as RecyclerView.Adapter<RecyclerView.ViewHolder>
+        )
     }
 
-    private fun setupFAB(view:FloatingActionButton) {
+    private fun onFabClicked(view: FloatingActionButton) {
         view.setOnClickListener {
             // inflate view
             val view =
@@ -77,21 +77,19 @@ class GenreManagementFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setPositiveButton(requireContext().getText(R.string.add), null)
-            .show()
+                .show()
 
 
             // get positive button and set on click for it
             val positiveButton: Button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
             positiveButton.setOnClickListener {
                 if (edtNewGenre.text.isNullOrBlank()) {
-                    edtLayoutNewGenre.error = requireContext().getString(R.string.you_must_enter_all_information)
+                    edtLayoutNewGenre.error =
+                        requireContext().getString(R.string.you_must_enter_all_information)
                 } else {
                     val genre = Genre(name = edtNewGenre.text.toString())
                     addIntoDatabase(genre)
-
                     dialog.dismiss()
-
-
                 }
             }
         }
@@ -100,17 +98,21 @@ class GenreManagementFragment : Fragment() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             GenreAdapter.DELETE -> {
-                adapter.deleteItem(genreList[item.groupId])
-                genreList.clear()
-                genreList = genreDB.getAllGenres()
-                adapter.notifyItemRemoved(item.groupId)
-                adapter.notifyItemRangeChanged(0, genreDB.getAllGenres().size)
-
+                AlertDialog.Builder(requireContext()).apply {
+                    setTitle(requireContext().resources.getString(R.string.delete))
+                    setMessage(requireContext().resources.getString(R.string.confirm_delete))
+                    setNegativeButton(requireContext().getText(R.string.cancel)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    setPositiveButton(requireContext().getText(R.string.delete)) { _, _ ->
+                        adapter.deleteItem(item.groupId)
+                    }
+                }.show()
             }
             GenreAdapter.EDIT -> {
-
+                editGenre(item.groupId)
             }
 
         }
@@ -118,12 +120,56 @@ class GenreManagementFragment : Fragment() {
 
     }
 
+    private fun editGenre(position:Int) {
+        val view =
+            LayoutInflater.from(requireContext()).inflate(R.layout.new_genre_dialog, null)
+        val edtLayoutNewGenre: TextInputLayout =
+            view.findViewById(R.id.edt_layout_new_genre)
+        val edtNewGenre: TextInputEditText = view.findViewById(R.id.edt_new_genre)
+
+        genreList = genreDB.getAllGenres()
+        edtNewGenre.setText(genreList[position].name)
+
+        // setup view and button for dialog
+        val dialog: AlertDialog = AlertDialog.Builder(requireContext())
+            .setTitle(requireContext().getText(R.string.edit))
+            .setView(view)
+            .setNegativeButton(requireContext().getText(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton(requireContext().getText(R.string.edit), null)
+            .show()
+
+
+        // get positive button and set on click for it
+        val positiveButton: Button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener {
+            if (edtNewGenre.text.isNullOrBlank()) {
+                edtLayoutNewGenre.error =
+                    requireContext().getString(R.string.you_must_enter_all_information)
+            } else {
+                val genre = Genre(name = edtNewGenre.text.toString())
+                adapter.editItem(position, genre)
+                dialog.dismiss()
+            }
+        }
+    }
+
+
     private fun addIntoDatabase(genre: Genre) {
 
         if (genreDB.addGenre(name = genre.name)) {
-            Toast.makeText(requireContext(), requireContext().getText(R.string.add_successful), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                requireContext().getText(R.string.add_successful),
+                Toast.LENGTH_SHORT
+            ).show()
         } else {
-            Toast.makeText(requireContext(),requireContext().getText(R.string.add_failed), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                requireContext().getText(R.string.add_failed),
+                Toast.LENGTH_SHORT
+            ).show()
         }
         adapter.mList.clear()
         adapter.mList = genreDB.getAllGenres()
