@@ -3,6 +3,7 @@ package com.example.sampleproject_mob2041.fragment
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -90,13 +91,30 @@ class GenreManagementFragment : Fragment() {
 
                     dialog.dismiss()
 
-                    adapter.mList.clear()
-                    adapter.mList = genreDB.getAllGenres()
-                    adapter.notifyItemInserted(genreDB.getAllGenres().size)
+
                 }
             }
         }
 
+
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            GenreAdapter.DELETE -> {
+                adapter.deleteItem(genreList[item.groupId])
+                genreList.clear()
+                genreList = genreDB.getAllGenres()
+                adapter.notifyItemRemoved(item.groupId)
+                adapter.notifyItemRangeChanged(0, genreDB.getAllGenres().size)
+
+            }
+            GenreAdapter.EDIT -> {
+
+            }
+
+        }
+        return super.onContextItemSelected(item)
 
     }
 
@@ -107,6 +125,10 @@ class GenreManagementFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(),requireContext().getText(R.string.add_failed), Toast.LENGTH_SHORT).show()
         }
+        adapter.mList.clear()
+        adapter.mList = genreDB.getAllGenres()
+        adapter.notifyItemInserted(genreDB.getAllGenres().size)
+        adapter.notifyItemRangeChanged(0, genreDB.getAllGenres().size)
     }
 }
 

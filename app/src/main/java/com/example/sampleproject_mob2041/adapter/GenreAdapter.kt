@@ -1,6 +1,7 @@
 package com.example.sampleproject_mob2041.adapter
 
 import android.content.Context
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,32 @@ import com.example.sampleproject_mob2041.database.Database
 import com.example.sampleproject_mob2041.database.GenreDB
 import com.example.sampleproject_mob2041.model.Genre
 
-class GenreAdapter(private val mContext: Context, var mList:ArrayList<Genre>) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+class GenreAdapter( val mContext: Context, var mList:ArrayList<Genre>) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
     private lateinit var genreDB: GenreDB
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    companion object {
+        const val DELETE = 121
+        const val EDIT = 122
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnCreateContextMenuListener {
         val genre: TextView = itemView.findViewById(R.id.genre_item_name)
         val genreItem:LinearLayout = itemView.findViewById(R.id.genre_item)
+
+        init {
+            genreItem.setOnCreateContextMenuListener(this)
+        }
+
+        override fun onCreateContextMenu(
+            menu: ContextMenu?,
+            v: View?,
+            menuInfo: ContextMenu.ContextMenuInfo?
+        ) {
+            menu?.add(adapterPosition, EDIT, 0, "Sua")
+            menu?.add(adapterPosition, DELETE, 1, "Lmao")
+        }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreAdapter.ViewHolder {
@@ -27,22 +49,16 @@ class GenreAdapter(private val mContext: Context, var mList:ArrayList<Genre>) : 
 
     override fun onBindViewHolder(holder: GenreAdapter.ViewHolder, position: Int) {
         holder.genre.text = mList[position].name
+
         
-        holder.genreItem.setOnLongClickListener {
-            deleteItem(mList[position])
-            this.notifyItemRemoved(position)
-            mList.clear()
-            mList = genreDB.getAllGenres()
-            this.notifyItemRangeChanged(position, genreDB.getAllGenres().size)
-            true
-        }
+
     }
 
     override fun getItemCount(): Int {
        return mList.size
     }
     
-    private fun deleteItem(genre: Genre) {
+    fun deleteItem(genre: Genre) {
         genreDB = GenreDB(Database(mContext))
         
         if (genreDB.removeGenre(genre.name)) {
@@ -50,5 +66,6 @@ class GenreAdapter(private val mContext: Context, var mList:ArrayList<Genre>) : 
         } else {
             Toast.makeText(mContext, mContext.getString(R.string.remove_failed), Toast.LENGTH_SHORT).show()
         }
+
     }
 }
