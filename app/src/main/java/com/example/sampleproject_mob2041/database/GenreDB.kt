@@ -20,7 +20,7 @@ class GenreDB(private val db:Database):IGenre {
     }
 
     override fun removeGenre(name: String): Boolean {
-        return database.delete(Database.TABLE_GENRE, "NAME = > ", arrayOf(name)) > 0
+        return database.delete(Database.TABLE_GENRE, "NAME = ? ", arrayOf(name)) > 0
     }
 
     override fun getAllGenres(): ArrayList<Genre> {

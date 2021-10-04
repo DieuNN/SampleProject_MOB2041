@@ -33,6 +33,7 @@ class CallCardAdapter( val mContext: Context,var mList:ArrayList<CallCard>) :
         holder.librarianName.text = "${mContext.resources.getString(R.string.librarian_name)}: ${mList[position].librarianName}"
         holder.returnStatus.text = setReturnStatusText(mList[position].isReturned)
 
+        // Set color for return status
         if (isReturned(mList[position].isReturned)) {
             holder.returnStatus.setTextColor(mContext.getColor(R.color.blue))
         } else {
@@ -44,9 +45,11 @@ class CallCardAdapter( val mContext: Context,var mList:ArrayList<CallCard>) :
         return mList.size
     }
 
+    // Check if returned
     private fun isReturned(strFromDB:String):Boolean = strFromDB != "0"
 
+    // If not returned, set text for return status
     private fun setReturnStatusText(strFromDB:String):String =
-         if (strFromDB == "0") "${mContext.resources.getString(R.string.not_returned)}" else "${mContext.resources.getString(R.string.returned)}"
+         if (!isReturned(strFromDB)) "${mContext.resources.getString(R.string.not_returned)}" else "${mContext.resources.getString(R.string.returned)}"
 
 }

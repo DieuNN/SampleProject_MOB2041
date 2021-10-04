@@ -28,6 +28,17 @@
     <string name="librarian_name">Tên thủ thư</string>
     <string name="returned">Đã trả</string>
     <string name="not_returned">Chưa trả</string>
+    <string name="add_new_genre">Thêm thể loại mới</string>
+    <string name="cancel">Huỷ</string>
+    <string name="add">Thêm</string>
+    <string name="you_must_enter_all_information">Bạn phải nhập đủ thông tin!</string>
+    <string name="add_successful">Thêm mới thành công!</string>
+    <string name="add_failed">Thêm mới thất bại! Có thể tên này đã có trong danh sách!</string>
+    <string name="remove_successful">Xoá thành công!</string>
+    <string name="remove_failed">Xoá thất bại!</string>
+    <string name="edit">Chỉnh sửa</string>
+    <string name="delete">Xoá</string>
+    
 
 
 

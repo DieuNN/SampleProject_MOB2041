@@ -8,11 +8,16 @@ import com.example.sampleproject_mob2041.adapter.GenreAdapter
 import com.example.sampleproject_mob2041.model.Genre
 
 class SetupRecyclerView {
-   companion object fun setupRecyclerView(mContext:Context,view:RecyclerView, mAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+    fun setupRecyclerView(mContext:Context,view:RecyclerView, mAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>) {
         view.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
             addItemDecoration(DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL))
+
+
         }
     }
+
+
+
 }
