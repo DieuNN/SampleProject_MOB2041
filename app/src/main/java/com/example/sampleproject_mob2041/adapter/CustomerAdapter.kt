@@ -16,14 +16,14 @@ import com.example.sampleproject_mob2041.model.Customer
 
 class CustomerAdapter(private val mContext: Context, var mList: ArrayList<Customer>) :
     RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
-    private lateinit var customerDB:CustomerDB
+    private lateinit var customerDB: CustomerDB
 
     companion object {
         const val DELETE_CUSTOMER = 131
         const val EDIT_CUSTOMER = 132
     }
 
-   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnCreateContextMenuListener {
         val customerName: TextView = itemView.findViewById(R.id.customer_item_name)
         val customerPhoneNumber: TextView = itemView.findViewById(R.id.customer_item_phone_number)
@@ -63,19 +63,49 @@ class CustomerAdapter(private val mContext: Context, var mList: ArrayList<Custom
         return mList.size
     }
 
-    fun removeItem(position: Int) {
+    fun deleteItem(position: Int) {
+        customerDB = CustomerDB(Database(mContext))
 
+        if (customerDB.removeCustomer(mList[position].name)) {
+            Toast.makeText(
+                mContext,
+                mContext.getString(R.string.remove_successful),
+                Toast.LENGTH_SHORT
+            ).show()
+            mList.clear()
+            mList = customerDB.getAllCustomer()
+            this.notifyItemRemoved(position)
+            this.notifyItemRangeChanged(position, mList.size)
+        } else {
+            Toast.makeText(mContext, mContext.getString(R.string.remove_failed), Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
-    fun addItem(customer:Customer) {
+    fun addItem(customer: Customer) {
         customerDB = CustomerDB(Database(mContext))
         if (customerDB.addCustomer(customer.name, customer.phoneNumber, customer.address)) {
-            Toast.makeText(mContext, mContext.getText(R.string.add_successful), Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, mContext.getText(R.string.add_successful), Toast.LENGTH_SHORT)
+                .show()
             mList.clear()
             mList = customerDB.getAllCustomer()
             this.notifyItemInserted(mList.size)
         } else {
-            Toast.makeText(mContext, mContext.getText(R.string.add_failed), Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, mContext.getText(R.string.add_failed), Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    fun editItem(position: Int, newCustomerValue:Customer) {
+        customerDB = CustomerDB(Database(mContext))
+
+        if (customerDB.editCustomer(mList[position].name, newCustomerValue)) {
+            Toast.makeText(mContext, mContext.getString(R.string.edit_successfull), Toast.LENGTH_SHORT).show()
+            mList.clear()
+            mList = customerDB.getAllCustomer()
+            this.notifyItemChanged(position)
+        } else {
+            Toast.makeText(mContext, mContext.getString(R.string.remove_failed), Toast.LENGTH_SHORT).show()
         }
     }
 }

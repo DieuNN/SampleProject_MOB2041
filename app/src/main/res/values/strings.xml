@@ -42,6 +42,8 @@
     <string name="edit_successfull">Chỉnh sửa thành công!</string>
     <string name="edit_failed">Chỉnh sửa thất bại!</string>
     <string name="add_new_customer">Thêm khách hàng mới</string>
+    <string name="add_book">Thêm sách</string>
+    <string name="edit_book">Sửa sách</string>
 
     
 
