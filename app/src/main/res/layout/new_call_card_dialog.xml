@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/new_call_card_item"
+    android:padding="8dp">
+
+
+    <TextView
+        android:id="@+id/txt_call_card_dialog_customer"
+        android:text="@string/customer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/new_call_card_customer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_call_card_dialog_customer" />
+
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/txt_call_card_dialog_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_call_card_customer"
+        android:text="@string/book_name" />
+
+    <Spinner
+        android:id="@+id/new_call_card_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_call_card_dialog_book"
+        android:autofillHints="creditCardExpirationDay" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/new_call_card_book"
+        android:hint="@string/time"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/edt_layout_new_call_card_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:editable="false"
+            android:id="@+id/edt_new_call_card_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+</RelativeLayout>

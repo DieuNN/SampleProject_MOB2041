@@ -7,13 +7,14 @@ import com.example.sampleproject_mob2041.model.CallCard
 class CallCardDB(db: Database) : ICallCard {
     private val database =db.writableDatabase
     override fun addCallCard(
-        ID: Int,
+        ID: Int?,
         customerName: String,
         bookName: String,
         genre: String,
         librarianName: String,
         borrowTime: String,
-        isReturned: String
+        isReturned: String,
+        price: Double
     ): Boolean {
         val values = ContentValues()
         values.apply {
@@ -23,6 +24,7 @@ class CallCardDB(db: Database) : ICallCard {
             put("LIBRARIAN_NAME", librarianName)
             put("BORROW_TIME", borrowTime)
             put("IS_RETURNED", isReturned)
+            put("PRICE", price)
         }
         return database.insert(Database.TABLE_CALL_CARD, null, values) > 0
     }
@@ -40,6 +42,7 @@ class CallCardDB(db: Database) : ICallCard {
             put("LIBRARIAN_NAME", newCallCardValue.librarianName)
             put("BORROW_TIME", newCallCardValue.borrowTime)
             put("IS_RETURNED", newCallCardValue.isReturned)
+            put("PRICE", newCallCardValue.price)
         }
         return database.update(Database.TABLE_CALL_CARD, values, "ID = ?", arrayOf(ID.toString())) > 0
     }
@@ -57,8 +60,9 @@ class CallCardDB(db: Database) : ICallCard {
                 val librarianName = cursor.getString(4)
                 val borrowTime = cursor.getString(5)
                 val isReturned = cursor.getString(6)
+                val price = cursor.getDouble(7)
 
-                val callCard = CallCard(ID, customerName, bookName, genre, librarianName, borrowTime, isReturned)
+                val callCard = CallCard(ID, customerName, bookName, genre, librarianName, borrowTime, isReturned, price)
 
                 result.add(callCard)
 

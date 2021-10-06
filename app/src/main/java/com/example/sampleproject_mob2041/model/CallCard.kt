@@ -7,5 +7,6 @@ data class CallCard(
     val genre: String,
     val librarianName: String,
     val borrowTime: String,
-    val isReturned: String
+    val isReturned: String,
+    val price:Double
 )

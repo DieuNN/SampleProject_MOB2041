@@ -44,6 +44,9 @@
     <string name="add_new_customer">Thêm khách hàng mới</string>
     <string name="add_book">Thêm sách</string>
     <string name="edit_book">Sửa sách</string>
+    <string name="time">Thời gian</string>
+    <string name="add_call_card">Thêm phiếu mượn mới</string>
+    <string name="information">Thông tin</string>
 
     
 

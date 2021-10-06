@@ -70,6 +70,7 @@ class BookManagementFragment : Fragment() {
                 val edtBookName: TextInputEditText = view.findViewById(R.id.edt_new_book_name)
                 val edtBookPrice: TextInputEditText = view.findViewById(R.id.edt_new_book_price)
 
+                bookList = bookDB.getAllBooks()
                 edtBookName.setText(bookList[item.groupId].name)
                 edtBookPrice.setText(bookList[item.groupId].price.toString())
 
