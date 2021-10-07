@@ -176,7 +176,6 @@ class CallCardManagementFragment : Fragment() {
         return result
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun getDateFromDatePicker(view: TextInputLayout): String {
         var result: String = " "
         view.setEndIconOnClickListener {
