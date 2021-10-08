@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // check if admin, then put admin role to intent to set menu view, if not admin, then set the view to normal user
             if (!isAdmin(
                     binding.edtSignInUsername.text.toString(),
                     binding.edtSignInPassword.text.toString()
@@ -52,36 +53,45 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
                     return@setOnClickListener
                 }
+            } else {
+                putCurrentUsernameToIntent(binding.edtSignInUsername)
             }
+
+            // if user checked remember button, commit data to SharedPreferences
             if (binding.chkSignInRememberPassword.isChecked) {
                 putToSharePreferences()
             } else {
                 preferencesEditor.clear().commit()
             }
-            putCurrentUsernameToIntent(binding.edtSignInUsername)
+
             finish()
         }
     }
 
+    // check if user exist
     private fun checkUserExist(userName: String, password: String): Boolean {
         val librarianDB = LibrarianDB(Database(applicationContext))
         return librarianDB.isLibrarianExist(userName, password)
     }
 
+    // get and set text from SharedPreferences for edittext
     private fun innerInfoFromSharedPreferences(isChecked: Boolean) {
         binding.edtSignInUsername.setText(sharedPreferences.getString("username", ""))
         binding.edtSignInPassword.setText(sharedPreferences.getString("password", ""))
         binding.chkSignInRememberPassword.isChecked = isChecked
     }
 
+    // back button pressed then finish activity
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
 
+    // check if admin
     private fun isAdmin(userName: String, password: String): Boolean =
         userName == "admin" && password == "admin"
 
+    // commit to SharedPreferences
     private fun putToSharePreferences() {
         sharedPreferences = getSharedPreferences("saved_info", MODE_PRIVATE)
         preferencesEditor = sharedPreferences.edit()
@@ -91,10 +101,12 @@ class LoginActivity : AppCompatActivity() {
         preferencesEditor.commit()
     }
 
+    // check if edittext is empty
     private fun isEmpty(userName: TextInputEditText, password: TextInputEditText): Boolean {
         return userName.text.isNullOrBlank() || password.text.toString().isEmpty()
     }
 
+    // put username and user type to intent and start main activity
     private fun putCurrentUsernameToIntent(
         userName: TextInputEditText
     ) {
@@ -108,7 +120,15 @@ class LoginActivity : AppCompatActivity() {
         } else {
             intent.putExtra("user_type", "normal")
             intent.putExtra("username", userName.text.toString())
+            intent.putExtra("display_name", getDisplayNameFromLoginName(userName.text.toString()))
         }
         startActivity(intent)
+    }
+
+    private fun getDisplayNameFromLoginName(loginName:String) : String {
+        val librarianDB = LibrarianDB(Database(applicationContext))
+
+        val opt = librarianDB.getAllLibrarians().stream().filter { lib -> lib.loginName == loginName }.findFirst()
+        return if (opt.isPresent) opt.get().displayName else ""
     }
 }

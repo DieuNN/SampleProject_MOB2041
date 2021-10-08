@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
+import com.example.sampleproject_mob2041.InitDataExample
 import com.example.sampleproject_mob2041.R
 import com.example.sampleproject_mob2041.fragment.*
 
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .replace(R.id.drawerLayoutFrameLayout, CallCardManagementFragment()).commit()
         binding.drawerLayoutNavigationView.setNavigationItemSelectedListener(this)
 
+//        InitDataExample().initData(applicationContext)
 
     }
 
@@ -49,7 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val headerView: View = navigationView.getHeaderView(0)
         val headerText = headerView.findViewById<TextView>(R.id.drawer_header_username)
 
-        headerText.text = "Xin chào: ${mIntent.getStringExtra("username")}"
+
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -58,13 +60,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        Toast.makeText(this, "${applicationContext.getText(R.string.hello)}: ${mIntent.getStringExtra("username")}" , Toast.LENGTH_SHORT).show()
+
 
         if (mIntent.getStringExtra("user_type") == "admin") {
             // true equals to admin
             setMenuDependOnUser(true)
+            headerText.text = "Xin chào: ${mIntent.getStringExtra("user_type")}"
+            Toast.makeText(
+                this,
+                "${applicationContext.getText(R.string.hello)}: ${mIntent.getStringExtra("user_type")}",
+                Toast.LENGTH_SHORT
+            ).show()
         } else {
             setMenuDependOnUser(false)
+            Toast.makeText(
+                this,
+                "${applicationContext.getText(R.string.hello)}: ${mIntent.getStringExtra("display_name")}",
+                Toast.LENGTH_SHORT
+            ).show()
+            headerText.text = "Xin chào: ${mIntent.getStringExtra("display_name")}"
         }
 
 

@@ -153,7 +153,14 @@ class CallCardManagementFragment : Fragment() {
         } else null
     }
 
-    private fun getLibrarianName(): String = requireActivity().intent.getStringExtra("user_type")!!
+    private fun getLibrarianName(): String {
+        val isAdmin: Boolean = requireActivity().intent.getStringExtra("user_type") == "admin"
+        return if (isAdmin) {
+            requireActivity().intent.getStringExtra("user_type")!!
+        } else {
+            requireActivity().intent.getStringExtra("display_name")!!
+        }
+    }
 
     private fun getBookPrice(book: Book): Double = book.price
 

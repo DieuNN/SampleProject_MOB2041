@@ -60,7 +60,7 @@ class CallCardAdapter(val mContext: Context, var mList: ArrayList<CallCard>) :
         holder.bookName.text =
             "${mContext.resources.getString(R.string.book_name)}: ${mList[position].bookName}"
         holder.librarianName.text =
-            "${mContext.resources.getString(R.string.librarian_name)}: ${mList[position].librarianName}"
+            "Cho mượn/trả bởi: ${mList[position].librarianName}"
         holder.returnStatus.text = getReturnStatusText(mList[position].isReturned)
 
         holder.callCardItem.setOnClickListener {

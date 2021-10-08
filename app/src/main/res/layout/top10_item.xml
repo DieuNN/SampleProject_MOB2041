@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/top10_item_position"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:text="1"
+        android:textSize="48sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:id="@+id/top10_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/top10_item_position"
+        android:text="Book name example" />
+
+
+    <TextView
+        android:id="@+id/top10_item_income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top10_item_name"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/top10_item_position"
+        android:text="Income example" />
+
+    <TextView
+        android:id="@+id/top10_item_borrowed_time"
+        android:text="Total borrowed time"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/top10_item_position"
+        android:layout_below="@+id/top10_item_income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>
