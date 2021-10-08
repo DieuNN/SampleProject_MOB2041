@@ -62,8 +62,6 @@ class CallCardManagementFragment : Fragment() {
         setupView(binding.callCardList)
 
         onFABClick(binding.fabAddCallCard)
-
-        Toast.makeText(requireContext(), getLibrarianName(), Toast.LENGTH_SHORT).show()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

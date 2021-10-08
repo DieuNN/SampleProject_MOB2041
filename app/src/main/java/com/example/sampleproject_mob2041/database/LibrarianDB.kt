@@ -35,6 +35,12 @@ class LibrarianDB(db: Database) : ILibrarian {
         return database.delete(Database.TABLE_LIBRARIAN, "LOGIN_NAME = ?", arrayOf(loginName)) > 0
     }
 
+    override fun isLibrarianExist(userName: String, password: String): Boolean {
+       val cursor = database.rawQuery("SELECT COUNT(*) FROM ${Database.TABLE_LIBRARIAN} WHERE LOGIN_NAME = \"$userName\" AND PASSWORD = \"$password\"", null)
+        cursor.moveToFirst()
+        return cursor.getInt(0) == 1
+    }
+
     override fun getAllLibrarians(): ArrayList<Librarian> {
         val cursor = database.rawQuery("SELECT * FROM ${Database.TABLE_LIBRARIAN}", null)
         val result = ArrayList<Librarian>()

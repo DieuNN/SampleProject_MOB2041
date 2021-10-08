@@ -5,6 +5,9 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.sampleproject_mob2041.R
+import com.example.sampleproject_mob2041.database.Database
+import com.example.sampleproject_mob2041.database.LibrarianDB
 import com.example.sampleproject_mob2041.databinding.ActivitySignInBinding
 import com.google.android.material.textfield.TextInputEditText
 
@@ -29,14 +32,40 @@ class LoginActivity : AppCompatActivity() {
                     .show()
                 return@setOnClickListener
             }
-            putRoleToIntent(binding.edtSignInUsername)
+
+            if (!isAdmin(
+                    binding.edtSignInUsername.text.toString(),
+                    binding.edtSignInPassword.text.toString()
+                )
+            ) {
+                if (checkUserExist(
+                        binding.edtSignInUsername.text.toString(),
+                        binding.edtSignInPassword.text.toString()
+                    )
+                ) {
+                    putCurrentUsernameToIntent(binding.edtSignInUsername)
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        applicationContext.getText(R.string.invalid_username_or_password),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+            }
             if (binding.chkSignInRememberPassword.isChecked) {
                 putToSharePreferences()
-            } else{
+            } else {
                 preferencesEditor.clear().commit()
             }
+            putCurrentUsernameToIntent(binding.edtSignInUsername)
             finish()
         }
+    }
+
+    private fun checkUserExist(userName: String, password: String): Boolean {
+        val librarianDB = LibrarianDB(Database(applicationContext))
+        return librarianDB.isLibrarianExist(userName, password)
     }
 
     private fun innerInfoFromSharedPreferences(isChecked: Boolean) {
@@ -50,6 +79,9 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun isAdmin(userName: String, password: String): Boolean =
+        userName == "admin" && password == "admin"
+
     private fun putToSharePreferences() {
         sharedPreferences = getSharedPreferences("saved_info", MODE_PRIVATE)
         preferencesEditor = sharedPreferences.edit()
@@ -60,16 +92,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun isEmpty(userName: TextInputEditText, password: TextInputEditText): Boolean {
-        return userName.text.isNullOrEmpty() && password.text.toString().isNullOrEmpty()
+        return userName.text.isNullOrBlank() || password.text.toString().isEmpty()
     }
 
-    private fun putRoleToIntent(
+    private fun putCurrentUsernameToIntent(
         userName: TextInputEditText
     ) {
         val intent = Intent(this, MainActivity::class.java)
 
 
-        if (userName.text.toString() ==  "admin") {
+        if (userName.text.toString() == "admin") {
             intent.putExtra("user_type", "admin")
             intent.putExtra("username", "admin")
 

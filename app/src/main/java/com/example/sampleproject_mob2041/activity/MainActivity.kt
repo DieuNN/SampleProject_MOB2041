@@ -58,9 +58,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        Toast.makeText(this, mIntent.getStringExtra("user_type"), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${applicationContext.getText(R.string.hello)}: ${mIntent.getStringExtra("username")}" , Toast.LENGTH_SHORT).show()
 
         if (mIntent.getStringExtra("user_type") == "admin") {
+            // true equals to admin
             setMenuDependOnUser(true)
         } else {
             setMenuDependOnUser(false)

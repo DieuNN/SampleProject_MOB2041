@@ -9,5 +9,9 @@ interface ILibrarian {
 
     fun removeLibrarian(loginName: String):Boolean
 
+    fun isLibrarianExist(userName:String, password: String):Boolean
+
     fun getAllLibrarians():ArrayList<Librarian>
+
+
 }

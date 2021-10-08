@@ -13,8 +13,6 @@ class SetupRecyclerView {
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
             addItemDecoration(DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL))
-
-
         }
     }
 
