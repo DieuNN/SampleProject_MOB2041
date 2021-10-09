@@ -51,6 +51,11 @@
     <string name="add_librarian">Thêm thủ thư</string>
     <string name="invalid_username_or_password">Sai tên đăng nhập hoặc mật khẩu!</string>
     <string name="hello">Xin chào</string>
+    <string name="from_day">Từ ngày</string>
+    <string name="to_day">Đến ngày</string>
+    <string name="from_day_must_before_to_day">Ngày bắt đầu phải trước ngày kết thúc!</string>
+    <string name="total_income">Tổng doanh thu</string>
+
     
 
 

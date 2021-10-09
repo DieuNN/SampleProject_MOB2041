@@ -42,8 +42,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onBackPressed() {
-        finish()
-        super.onBackPressed()
+        AlertDialog.Builder(this).apply {
+            setTitle("Xác nhận thoát")
+            setMessage("Bạn chắc chắn muốn thoát?")
+            setPositiveButton("Thoát") { _, _ ->
+                finish()
+            }
+            setNegativeButton("Hủy") { dialog, _ ->
+                dialog.dismiss()
+            }
+        }.create().show()
+
     }
 
     private fun setupDrawerLayout(toolbar: Toolbar, drawerLayout: DrawerLayout, toolbarTitle: Int) {

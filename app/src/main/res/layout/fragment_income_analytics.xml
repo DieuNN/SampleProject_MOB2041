@@ -1,14 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.IncomeAnalyticsFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="8dp"
+        tools:context=".fragment.IncomeAnalyticsFragment">
 
-</FrameLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtLayoutAnalyticsFromDay"
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content"
+            android:hint="@string/from_day"
+            app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:editable="false"
+                android:id="@+id/edtAnalyticsFromDay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtLayoutAnalyticsToDay"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtLayoutAnalyticsFromDay"
+            android:layout_marginTop="8dp"
+            android:hint="@string/to_day"
+            app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtAnalyticsToDay"
+                android:editable="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnStartAnalytics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtLayoutAnalyticsToDay"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/analytics" />
+
+        <TextView
+            android:id="@+id/txtTotalIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnStartAnalytics"
+            android:text="@string/total_income" />
+
+        <TextView
+            android:id="@+id/txtNotReturnedIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTotalIncome"
+            android:layout_marginTop="8dp"
+            android:text="@string/not_returned" />
+
+        <TextView
+            android:id="@+id/txtReturnedIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNotReturnedIncome"
+            android:layout_marginTop="8dp"
+            android:text="@string/returned" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_marginTop="16dp"
+            android:id="@+id/chartLineChart"
+            android:layout_below="@+id/txtReturnedIncome"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
+
+
+    </RelativeLayout>
+</ScrollView>

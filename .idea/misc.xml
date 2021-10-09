@@ -17,7 +17,9 @@
         <entry key="app/src/main/res/layout/fragment_book_management.xml" value="0.16185410334346503" />
         <entry key="app/src/main/res/layout/fragment_call_card_management.xml" value="0.16210739614994935" />
         <entry key="app/src/main/res/layout/fragment_customer_management.xml" value="0.3328125" />
+        <entry key="app/src/main/res/layout/fragment_edit_information.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_genre.xml" value="0.3328125" />
+        <entry key="app/src/main/res/layout/fragment_income_analytics.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_librarian.xml" value="0.14893617021276595" />
         <entry key="app/src/main/res/layout/fragment_top10.xml" value="0.25" />
         <entry key="app/src/main/res/layout/genre_item.xml" value="0.33" />
