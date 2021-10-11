@@ -62,6 +62,7 @@
     <string name="password_must_be_the_same">Mật khẩu không khớp!</string>
     <string name="wrong_password">`Sai mật khẩu hiện tại!</string>
     <string name="change_information_successfully">Thay đổi thông tin thành công! Xin vui lòng đăng nhập lại!</string>
+    <string name="empty_list">Danh sách trống!</string>
 
     
 

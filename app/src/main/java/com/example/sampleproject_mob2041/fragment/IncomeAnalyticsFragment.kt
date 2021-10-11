@@ -178,6 +178,8 @@ class IncomeAnalyticsFragment : Fragment() {
         dataSet.add(lineDataSet)
         val lineData = LineData(dataSet)
         binding.chartLineChart.apply {
+            axisLeft.axisMinimum = 0f
+            axisRight.axisMinimum = 0f
             data = lineData
             invalidate()
         }

@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .replace(R.id.drawerLayoutFrameLayout, CallCardManagementFragment()).commit()
         binding.drawerLayoutNavigationView.setNavigationItemSelectedListener(this)
 
-        InitDataExample().initData(applicationContext)
 
     }
 

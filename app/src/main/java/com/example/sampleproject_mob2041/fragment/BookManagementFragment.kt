@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sampleproject_mob2041.R
@@ -42,6 +43,8 @@ class BookManagementFragment : Fragment() {
         bookDB = BookDB(Database(requireContext()))
         bookList = bookDB.getAllBooks()
         adapter = BookAdapter(requireContext(), bookList)
+
+        setEmptyListWarning()
 
         setupRecyclerView(binding.bookList)
 
@@ -126,6 +129,7 @@ class BookManagementFragment : Fragment() {
                     }
                     .setPositiveButton(requireContext().getString(R.string.delete)) { _, _ ->
                         adapter.deleteItem(item.groupId)
+                        setEmptyListWarning()
                     }
                     .show()
             }
@@ -169,23 +173,39 @@ class BookManagementFragment : Fragment() {
 
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.setOnClickListener {
-                if (edtBookName.text.isNullOrBlank()) {
-                    edtLayoutBookName.error =
-                        requireContext().getString(R.string.you_must_enter_all_information)
-                } else if (edtBookPrice.text.isNullOrBlank()) {
-                    edtLayoutBookPrice.error =
-                        requireContext().getString(R.string.you_must_enter_all_information)
-                } else {
-                    adapter.addItem(
-                        Book(
-                            name = edtBookName.text.toString(),
-                            genre = spinnerGenre.selectedItem.toString(),
-                            price = edtBookPrice.text.toString().toDouble()
+                when {
+                    edtBookName.text.isNullOrBlank() -> {
+                        edtLayoutBookName.error =
+                            requireContext().getString(R.string.you_must_enter_all_information)
+                    }
+                    edtBookPrice.text.isNullOrBlank() -> {
+                        edtLayoutBookPrice.error =
+                            requireContext().getString(R.string.you_must_enter_all_information)
+                    }
+                    spinnerGenre.selectedItem == null -> {
+                        Toast.makeText(requireContext(), requireContext().getText(R.string.you_must_enter_all_information), Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        adapter.addItem(
+                            Book(
+                                name = edtBookName.text.toString(),
+                                genre = spinnerGenre.selectedItem.toString(),
+                                price = edtBookPrice.text.toString().toDouble()
+                            )
                         )
-                    )
-                    dialog.dismiss()
+                        setEmptyListWarning()
+                        dialog.dismiss()
+                    }
                 }
             }
+        }
+    }
+
+    private fun setEmptyListWarning() {
+        if (bookDB.getAllBooks().isEmpty()) {
+            binding.txtBookListEmpty.visibility = View.VISIBLE
+        } else {
+           binding.txtBookListEmpty.visibility = View.GONE
         }
     }
 

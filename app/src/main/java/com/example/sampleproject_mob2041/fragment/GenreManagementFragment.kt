@@ -45,6 +45,8 @@ class GenreManagementFragment : Fragment() {
         genreDB = GenreDB(Database(requireContext()))
         genreList = genreDB.getAllGenres()
 
+        setEmptyListWarning()
+
 
         adapter = GenreAdapter(requireContext(), genreList)
 
@@ -95,10 +97,11 @@ class GenreManagementFragment : Fragment() {
                     val genre = Genre(name = edtNewGenre.text.toString())
                     addIntoDatabase(genre)
                     dialog.dismiss()
+                    setEmptyListWarning()
                 }
             }
-        }
 
+        }
 
     }
 
@@ -113,7 +116,9 @@ class GenreManagementFragment : Fragment() {
                     }
                     setPositiveButton(requireContext().getText(R.string.delete)) { _, _ ->
                         adapter.deleteItem(item.groupId)
+                        setEmptyListWarning()
                     }
+
                 }.show()
             }
             GenreAdapter.EDIT -> {
@@ -183,6 +188,14 @@ class GenreManagementFragment : Fragment() {
         adapter.mList = genreDB.getAllGenres()
         adapter.notifyItemInserted(genreDB.getAllGenres().size)
         adapter.notifyItemRangeChanged(0, genreDB.getAllGenres().size)
+    }
+
+    private fun setEmptyListWarning() {
+        if (genreDB.getAllGenres().isEmpty()) {
+            binding.txtGenreListIsEmpty.visibility = View.VISIBLE
+        } else {
+            binding.txtGenreListIsEmpty.visibility = View.GONE
+        }
     }
 }
 

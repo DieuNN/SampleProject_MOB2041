@@ -21,4 +21,13 @@
         android:layout_height="wrap_content"
         android:contentDescription="Add Customer" />
 
+    <TextView
+        android:id="@+id/txtCustomerListEmpty"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="@string/empty_list"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>

@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/layout/drawer_header.xml" value="0.33" />
         <entry key="app/src/main/res/layout/edit_call_card_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_book_management.xml" value="0.16185410334346503" />
-        <entry key="app/src/main/res/layout/fragment_call_card_management.xml" value="0.16210739614994935" />
+        <entry key="app/src/main/res/layout/fragment_call_card_management.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_customer_management.xml" value="0.3328125" />
         <entry key="app/src/main/res/layout/fragment_edit_information.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_genre.xml" value="0.3328125" />

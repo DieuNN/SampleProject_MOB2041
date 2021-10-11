@@ -43,6 +43,8 @@ class CustomerManagementFragment : Fragment() {
         adapter = CustomerAdapter(requireContext(), customerDB.getAllCustomer())
         customerList = customerDB.getAllCustomer()
 
+        setEmptyListWarning()
+
         setupView(binding.customerList)
 
         onFabClick(binding.fabAddCustomer)
@@ -59,6 +61,7 @@ class CustomerManagementFragment : Fragment() {
                     }
                     .setPositiveButton(requireContext().getString(R.string.delete)) { _, _ ->
                         adapter.deleteItem(item.groupId)
+                        setEmptyListWarning()
                     }.show()
             }
             CustomerAdapter.EDIT_CUSTOMER -> {
@@ -124,6 +127,7 @@ class CustomerManagementFragment : Fragment() {
                             )
                             adapter.editItem(item.groupId, customer)
                             dialog.dismiss()
+
                         }
                     }
                 }
@@ -188,6 +192,7 @@ class CustomerManagementFragment : Fragment() {
                             edtCustomerAddress.text.toString()
                         )
                     )
+                    setEmptyListWarning()
                     dialog.dismiss()
                 }
             }
@@ -200,6 +205,15 @@ class CustomerManagementFragment : Fragment() {
             view,
             adapter as RecyclerView.Adapter<RecyclerView.ViewHolder>
         )
+    }
+
+    private fun setEmptyListWarning() {
+        if(customerDB.getAllCustomer().isEmpty()) {
+            binding.txtCustomerListEmpty.visibility = View.VISIBLE
+        }
+        else {
+            binding.txtCustomerListEmpty.visibility = View.GONE
+        }
     }
 
 

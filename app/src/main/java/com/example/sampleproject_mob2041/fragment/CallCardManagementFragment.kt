@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -58,6 +59,8 @@ class CallCardManagementFragment : Fragment() {
         bookDB = BookDB(database)
         customerDB = CustomerDB(database)
         adapter = CallCardAdapter(requireContext(), callCardDB.getAllCallCards())
+
+        setEmptyListWarning()
 
         setupView(binding.callCardList)
 
@@ -120,7 +123,10 @@ class CallCardManagementFragment : Fragment() {
                     Handler(Looper.getMainLooper()).postDelayed({
                         edtLayoutBorrowTime.error = null
                     }, 2000)
-                } else {
+                } else if (spinnerBookName.selectedItem == null || spinnerCustomerName.selectedItem == null) {
+                    Toast.makeText(requireContext(), requireContext().getText(R.string.you_must_enter_all_information), Toast.LENGTH_SHORT).show()
+                }
+                else {
                     adapter.addItem(
                         CallCard(
                             ID = null,
@@ -133,6 +139,7 @@ class CallCardManagementFragment : Fragment() {
                             price = getBookPrice(spinnerBookName.selectedItem.toString())!!.price
                         )
                     )
+                    setEmptyListWarning()
                     dialog.dismiss()
                 }
             }
@@ -158,11 +165,11 @@ class CallCardManagementFragment : Fragment() {
         return if (isAdmin) {
             requireActivity().intent.getStringExtra("user_type")!!
         } else {
-            requireActivity().intent.getStringExtra("display_name")!!
+            requireActivity().intent.getStringExtra("username")!!
         }
     }
 
-    private fun getBookPrice(book: Book): Double = book.price
+
 
 
     private fun setElementForSpinner(view: Spinner, list: ArrayList<String>) {
@@ -299,12 +306,21 @@ class CallCardManagementFragment : Fragment() {
                     }
                     setPositiveButton(requireContext().getText(R.string.delete)) { _, _ ->
                         adapter.removeItem(callCardList[item.groupId].ID!!, item.groupId)
+                        setEmptyListWarning()
                     }
                 }.show()
 
             }
         }
         return super.onContextItemSelected(item)
+    }
+
+    private fun setEmptyListWarning() {
+        if(callCardDB.getAllCallCards().isEmpty()) {
+            binding.txtCallCardListEmpty.visibility = View.VISIBLE
+        } else {
+            binding.txtCallCardListEmpty.visibility = View.GONE
+        }
     }
 
 
