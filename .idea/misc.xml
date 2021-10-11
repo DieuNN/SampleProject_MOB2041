@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_top10.xml" value="0.25" />
         <entry key="app/src/main/res/layout/genre_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/librarian_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/new_book_dialog.xml" value="0.12771739130434784" />
+        <entry key="app/src/main/res/layout/new_book_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/new_call_card_dialog.xml" value="0.47784200385356457" />
         <entry key="app/src/main/res/layout/new_customer_dialog.xml" value="0.2" />
         <entry key="app/src/main/res/layout/new_genre_dialog.xml" value="0.25" />

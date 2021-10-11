@@ -16,9 +16,17 @@ class Database(private val mContext: Context) :
         const val TABLE_LIBRARIAN = "LIBRARIAN"
     }
 
-    override fun onCreate(db: SQLiteDatabase) {
+    override fun onOpen(db: SQLiteDatabase) {
+        super.onOpen(db)
         // Enable foreign key
         db.execSQL("PRAGMA foreign_keys = ON")
+
+
+
+    }
+
+    override fun onCreate(db: SQLiteDatabase) {
+
 
         // Create table genre
         db.execSQL("CREATE TABLE $TABLE_GENRE (NAME TEXT PRIMARY KEY)")
@@ -31,6 +39,9 @@ class Database(private val mContext: Context) :
 
         // Create table librarian
         db.execSQL("CREATE TABLE $TABLE_LIBRARIAN (LOGIN_NAME TEXT PRIMARY KEY, DISPLAY_NAME TEXT, PASSWORD TEXT)")
+
+        // init admin account
+        db.execSQL("INSERT INTO $TABLE_LIBRARIAN VALUES ('admin', 'admin', 'admin')")
 
         // Create table call card (Phiếu mượn), foreign key BOOK_NAME references TABLE_BOOK, CUSTOMER_NAME references TABLE CUSTOMER
         // LIBRARIAN_NAME references TABLE_LIBRARIAN

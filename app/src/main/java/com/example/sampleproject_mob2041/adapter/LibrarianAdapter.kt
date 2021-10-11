@@ -16,11 +16,15 @@ import com.example.sampleproject_mob2041.model.Librarian
 
 class LibrarianAdapter(private val mContext: Context, var mList: ArrayList<Librarian>) :
     RecyclerView.Adapter<LibrarianAdapter.ViewHolder>() {
+
+
+
     private lateinit var librarianDB: LibrarianDB
 
     companion object {
         const val DELETE = 161
     }
+
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -49,6 +53,7 @@ class LibrarianAdapter(private val mContext: Context, var mList: ArrayList<Libra
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.displayName.text = "${mContext.getText(R.string.name)}: ${mList[position].displayName}"
         holder.loginName.text = "${mContext.getText(R.string.login_name)}: ${mList[position].loginName}"
 
@@ -75,6 +80,11 @@ class LibrarianAdapter(private val mContext: Context, var mList: ArrayList<Libra
 
     fun deleteItem(position: Int) {
         librarianDB = LibrarianDB(Database(mContext))
+
+        if (mList[position].loginName == "admin") {
+            Toast.makeText(mContext, "Không thể xóa tài khoản admin!", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         if (librarianDB.removeLibrarian(mList[position].loginName)) {
             Toast.makeText(mContext, mContext.getText(R.string.remove_successful), Toast.LENGTH_SHORT).show()

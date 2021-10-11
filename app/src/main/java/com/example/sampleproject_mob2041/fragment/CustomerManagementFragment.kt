@@ -1,6 +1,8 @@
 package com.example.sampleproject_mob2041.fragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -92,23 +94,37 @@ class CustomerManagementFragment : Fragment() {
 
                 val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
                 positiveButton.setOnClickListener {
-                    if (edtCustomerName.text.isNullOrBlank()) {
-                        edtLayoutCustomerName.error =
-                            requireContext().getText(R.string.you_must_enter_all_information)
-                    } else if (edtCustomerAddress.text.isNullOrBlank()) {
-                        edtLayoutCustomerAddress.error =
-                            requireContext().getText(R.string.you_must_enter_all_information)
-                    } else if (edtCustomerPhoneNumber.text.isNullOrBlank()) {
-                        edtLayoutCustomerPhoneNumber.error =
-                            requireContext().getText(R.string.you_must_enter_all_information)
-                    } else {
-                        val customer = Customer(
-                            edtCustomerName.text.toString(),
-                            edtCustomerPhoneNumber.text.toString(),
-                            edtCustomerAddress.text.toString()
-                        )
-                        adapter.editItem(item.groupId, customer)
-                        dialog.dismiss()
+                    when {
+                        edtCustomerName.text.isNullOrBlank() -> {
+                            edtLayoutCustomerName.error =
+                                requireContext().getText(R.string.you_must_enter_all_information)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                edtLayoutCustomerName.error = null
+                            }, 2000)
+                        }
+                        edtCustomerAddress.text.isNullOrBlank() -> {
+                            edtLayoutCustomerAddress.error =
+                                requireContext().getText(R.string.you_must_enter_all_information)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                edtLayoutCustomerAddress.error =null
+                            }, 2000)
+                        }
+                        edtCustomerPhoneNumber.text.isNullOrBlank() -> {
+                            edtLayoutCustomerPhoneNumber.error =
+                                requireContext().getText(R.string.you_must_enter_all_information)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                edtLayoutCustomerPhoneNumber.error = null
+                            }, 2000)
+                        }
+                        else -> {
+                            val customer = Customer(
+                                edtCustomerName.text.toString(),
+                                edtCustomerPhoneNumber.text.toString(),
+                                edtCustomerAddress.text.toString()
+                            )
+                            adapter.editItem(item.groupId, customer)
+                            dialog.dismiss()
+                        }
                     }
                 }
             }
@@ -149,12 +165,21 @@ class CustomerManagementFragment : Fragment() {
                 if (edtCustomerName.text.isNullOrBlank()) {
                     edtLayoutCustomerName.error =
                         requireContext().getText(R.string.you_must_enter_all_information)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        edtLayoutCustomerName.error = null
+                    }, 2000)
                 } else if (edtCustomerAddress.text.isNullOrBlank()) {
                     edtLayoutCustomerAddress.error =
                         requireContext().getText(R.string.you_must_enter_all_information)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        edtLayoutCustomerAddress.error = null
+                    }, 2000)
                 } else if (edtCustomerPhoneNumber.text.isNullOrBlank()) {
                     edtLayoutCustomerPhoneNumber.error =
                         requireContext().getText(R.string.you_must_enter_all_information)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        edtLayoutCustomerPhoneNumber.error = null
+                    }, 2000)
                 } else {
                     adapter.addItem(
                         Customer(

@@ -2,6 +2,8 @@ package com.example.sampleproject_mob2041.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -86,6 +88,9 @@ class GenreManagementFragment : Fragment() {
                 if (edtNewGenre.text.isNullOrBlank()) {
                     edtLayoutNewGenre.error =
                         requireContext().getString(R.string.you_must_enter_all_information)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        edtLayoutNewGenre.error = null
+                    }, 1500)
                 } else {
                     val genre = Genre(name = edtNewGenre.text.toString())
                     addIntoDatabase(genre)
@@ -147,6 +152,9 @@ class GenreManagementFragment : Fragment() {
             if (edtNewGenre.text.isNullOrBlank()) {
                 edtLayoutNewGenre.error =
                     requireContext().getString(R.string.you_must_enter_all_information)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    edtLayoutNewGenre.error = null
+                }, 2000)
             } else {
                 val genre = Genre(name = edtNewGenre.text.toString())
                 adapter.editItem(position, genre)

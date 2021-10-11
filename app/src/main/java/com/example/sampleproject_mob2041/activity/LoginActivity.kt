@@ -131,4 +131,9 @@ class LoginActivity : AppCompatActivity() {
         val opt = librarianDB.getAllLibrarians().stream().filter { lib -> lib.loginName == loginName }.findFirst()
         return if (opt.isPresent) opt.get().displayName else ""
     }
+
+    private fun initAdminAccount() {
+        val librarianDB:LibrarianDB = LibrarianDB(Database(applicationContext))
+
+    }
 }

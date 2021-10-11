@@ -52,7 +52,6 @@ class LibrarianManagementFragment : Fragment() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             LibrarianAdapter.DELETE -> {
                 AlertDialog.Builder(requireContext()).apply {

@@ -55,6 +55,13 @@
     <string name="to_day">Đến ngày</string>
     <string name="from_day_must_before_to_day">Ngày bắt đầu phải trước ngày kết thúc!</string>
     <string name="total_income">Tổng doanh thu</string>
+    <string name="current_password">Mật khẩu hiện tại</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="re_new_password">Nhập lại mật khẩu mới</string>
+    <string name="change">Thay đổi</string>
+    <string name="password_must_be_the_same">Mật khẩu không khớp!</string>
+    <string name="wrong_password">`Sai mật khẩu hiện tại!</string>
+    <string name="change_information_successfully">Thay đổi thông tin thành công! Xin vui lòng đăng nhập lại!</string>
 
     
 
